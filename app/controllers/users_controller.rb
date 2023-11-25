@@ -6,7 +6,11 @@ class UsersController < ApplicationController
 	def new
 		@user = User.new
 	end
+	def consultar
 
+	end
+	def log
+	end 
 	def create
 		req_params = {}
 		9.times { |i| req_params[user_params.keys[i]] = user_params.values[i] }
@@ -26,6 +30,15 @@ class UsersController < ApplicationController
 		end
 	end
 
+
+	def new
+		@user = User.new
+	end
+
+	def create 
+
+	end
+	
 	def show
 		response = Faraday.get('http://192.168.0.101:3001/users/'.concat(
 								params[:docType].to_s,"/", params[:docNum].to_s))

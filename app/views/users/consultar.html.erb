@@ -1,0 +1,71 @@
+<!-- En consultar.html.erb -->
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    select,
+    input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+</style>
+<form action = "/u/foo" >
+  <br>
+  <label for="docType">Tipo de Documento</label>
+  <br>
+  <select id="docType" name="docType", required>
+    <option value=0>Cedula</option>
+    <option value=1>Tarjeta Identidad</option>
+  </select>
+  <br>
+  <label for="docNum">Numero de Documento</label>
+  <br>
+  <input type="number" name="docNum" required max=9999999999>
+  <br>
+  <br>
+  <input type="submit"/>
+</form>
