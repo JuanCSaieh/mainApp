@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 	def consultar
 	end
 	def log
-	end log 
+	end 
 	def create
 		conn = Faraday.new(url: 'http://192.168.0.101:3001')
 		
