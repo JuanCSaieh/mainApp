@@ -2,17 +2,24 @@ class UsersController < ApplicationController
 	require 'net/http'
 
 	def index
-		@user = User.all
+		@users = User.all
 	end
+	def consultar
 
-	def new
-		#@user = User.new
 	end
-
-	def create
+	def log
 		
 	end
 
+
+	def new
+		@user = User.new
+	end
+
+	def create 
+
+	end
+	
 	def show
 		
 	end

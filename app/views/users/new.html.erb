@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+    <div>
+        <%= f.label :Nombre %>
+        <%= f.text_field :firstName %>
+    </div>
+    <div>
+        <%= f.label :'Segundo nombre' %>
+        <%= f.text_field :secondName %>
+    </div>
+    <div>
+        <%= f.label :Apellidos %>
+        <%= f.text_field :lastName %>
+    </div>
+    <div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+    </div>
+    <div>
+        <%= f.label :Número %>
+        <%= f.text_field :phoneNumber %>
+    </div>
+    <div>
+        <%= f.submit %>
+    </div>
+<% end %>
