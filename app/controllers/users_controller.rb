@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   			req.body = JSON.generate(user_params)
 		end
 		if response.status == 200
-			# redirect to show
+			@user = User.find(JSON.parse(response.body)["id"])
+			# redirect to show view
 		else
 			render status: 422
 	end
@@ -21,8 +22,9 @@ class UsersController < ApplicationController
 	def show
 		response = Faraday.get('http://192.168.0.101:3001/users/'
 								+ params[:docType] + '/' + params[:docNum])
-		if response.status = 200
-			render json: response.body
+		if response.status == 200
+			@user = User.find(JSON.parse(response.body)["id"])
+			render json: @user
 		else
 			render status: :not_found
 	end
@@ -33,7 +35,8 @@ class UsersController < ApplicationController
 		  	req.headers['Content-Type'] = 'application/json'
 		  	req.body = JSON.generate(user_params)
 		end
-		if response.status = 200
+		if response.status == 200
+			@user = User.find(params[:id])
 			# redirect to show
 		else
 			render status: 422
@@ -43,7 +46,7 @@ class UsersController < ApplicationController
 	def destroy
 		conn = Faraday.new(url: 'http://192.168.0.101:3001')
 		response = conn.delete('/users/' + params[:id])
-		if response.status = 200
+		if response.status == 200
 			# redirect to index or consult view
 		else
 			render status: :not_found
