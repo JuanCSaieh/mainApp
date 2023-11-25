@@ -6,6 +6,7 @@ Rails.application.routes.draw do
  get'/users/edit', to: 'users#edit'
  get'/logs/consultar', to: 'logs#consultar'
  get'users/show', to: 'users#show'
+get'/logs', to: 'logs#index'
 
  
 
