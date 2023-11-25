@@ -1,0 +1,66 @@
+<div style="margin-bottom: 20px; display: flex;">
+    <div style="width: 48%;">
+        <h1 style="margin-bottom: 10px;">Listado de usuarios</h1>
+    </div>
+    <div style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+        <%= button_to "Nuevo", "/users/new",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
+        <%= button_to "Log", "/users/log",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
+        <%= button_to "Consultar", "/users/consultar",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
+    </div>
+</div>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center; /* Alinea el texto en el centro */
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 5%;">Foto</th>
+            <th style="width: 10%;">Tipo de Documento</th>
+            <th style="width: 10%;">N. Documento</th>
+            <th style="width: 10%;">Primer Nombre</th>
+            <th style="width: 10%;">Segundo Nombre</th>
+            <th style="width: 10%;">Apellidos</th>
+            <th style="width: 10%;">Fecha de Nacimiento</th>
+            <th style="width: 5%;">Género</th>
+            <th style="width: 15%;">Correo Electrónico</th>
+            <th style="width: 15%;">Celular</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= image_tag user.photo_url, alt: 'User Photo' %></td>
+                <td><%= user.docType %></td>
+                <td><%= user.docNum %></td>
+                <td><%= user.firstName %></td>
+                <td><%= user.secondName %></td>
+                <td><%= user.lastName %></td>
+                <td><%= user.dateBirth %></td>
+                <td><%= user.gender %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phoneNumber %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
