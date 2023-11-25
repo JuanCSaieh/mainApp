@@ -17,4 +17,5 @@ class User < ApplicationRecord
 	
 	enum docType: { cedula: 0, identidad: 1 }
 	enum gender: { masculino: 0, femenino: 1, noBinario: 2, noResponde: 3 }
+
 end
