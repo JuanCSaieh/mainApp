@@ -1,55 +1,103 @@
-<div style="margin-bottom: 20px; display: flex;">
-    <div style="width: 48%;">
-        <h1 style="margin-bottom: 10px;">Listado de usuarios</h1>
-    </div>
-    <div style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-        <%= button_to "Nuevo", "/users/new",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
-        <%= button_to "Log", "/users/log",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
-        <%= button_to "Consultar", "/users/consultar",method: :get,class: "btn btn-info", style: "margin-bottom: 10px; width: 100%;" %>
-    </div>
-</div>
 <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
     }
 
     th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center; /* Alinea el texto en el centro */
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
     }
 
     th {
-        background-color: #f2f2f2;
+        background-color: #3498db;
+        color: #ffffff;
     }
 
-    img {
-        max-width: 100%;
-        height: auto;
+    tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .buttons-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #2980b9;
     }
 </style>
+
+<div class="container">
+    <div>
+        <h1>Listado de usuarios</h1>
+    </div>
+    <div class="buttons-container">
+        <%= button_to "Nuevo", new_user_path, method: :get, class: "btn btn-info" %>
+        <%= button_to "Log", logs_index_path, method: :get, class: "btn btn-info" %>
+        <%= button_to "Consultar", users_consultar_path, method: :get, class: "btn btn-info" %>
+    </div>
+</div>
+
 
 <table>
     <thead>
         <tr>
-            <th style="width: 5%;">Foto</th>
-            <th style="width: 10%;">Tipo de Documento</th>
-            <th style="width: 10%;">N. Documento</th>
-            <th style="width: 10%;">Primer Nombre</th>
-            <th style="width: 10%;">Segundo Nombre</th>
-            <th style="width: 10%;">Apellidos</th>
-            <th style="width: 10%;">Fecha de Nacimiento</th>
-            <th style="width: 5%;">Género</th>
-            <th style="width: 15%;">Correo Electrónico</th>
-            <th style="width: 15%;">Celular</th>
+            <th>Foto</th>
+            <th>Tipo de Documento</th>
+            <th>N. Documento</th>
+            <th>Primer Nombre</th>
+            <th>Segundo Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Género</th>
+            <th>Correo Electrónico</th>
+            <th>Celular</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <% @users.each do |user| %>
             <tr>
-                <td><%= image_tag user.photo_url, alt: 'User Photo' %></td>
+                <td></td>
                 <td><%= user.docType %></td>
                 <td><%= user.docNum %></td>
                 <td><%= user.firstName %></td>
@@ -59,8 +107,13 @@
                 <td><%= user.gender %></td>
                 <td><%= user.email %></td>
                 <td><%= user.phoneNumber %></td>
+                <td><%= link_to "+",
+                            show_path(user.docType, user.docNum),
+                            class: "btn btn-danger btn-lg"  %></td>
+                <td><%= link_to "Modificar",
+                            edit_user_path(user),
+                            class: "btn btn-danger btn-lg"  %></td>
             </tr>
         <% end %>
     </tbody>
 </table>
-

@@ -1,3 +1,4 @@
+
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -8,6 +9,28 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+    }
+    .buttons-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #2980b9;
     }
 
     form {
@@ -64,46 +87,49 @@
 <%= form_for @user, html: { multipart: true } do |f| %>
     <div>
         <%= f.label :Foto, id: 'id_photo' %>
-        <%= f.file_field :photo_url, id: 'photo_upload',required: true,  accept: 'image/*'   %>
+        <%= f.file_field :photo_url, id: 'photo_upload',required: true,  accept: 'image/*',value: @user.photo   %>
     </div>
     <div>
         <%= f.label :'Tipo de documento',id: 'id_docType' %>
-        <%= f.select :docType, User.docTypes.keys.map{ |key| [key.humanize, key] } %>
+        <%= f.select :docType, User.docTypes.keys.map{ |key| [key.humanize, key] },value: @user.docType %>
     </div>
     <div>
         <%= f.label :'Número de Documento',id: 'id_docNum' %>
-        <%= f.number_field :docNum, max: 9999999999,required: true%>
+        <%= f.number_field :docNum, max: 9999999999,required: true,value: @user.docNum%>
     </div>
     <div>
         <%= f.label :Nombre ,id: 'id_firstName' %>
-        <%= f.text_field :firstName ,required: true,maxlength: 30%>
+        <%= f.text_field :firstName ,required: true,maxlength: 30%,value: @user.firstName%>
     </div>
     <div>
         <%= f.label :'Segundo nombre',id: 'id_secondName' %>
-        <%= f.text_field :secondName, maxlength: 30%>
+        <%= f.text_field :secondName, maxlength: 30%, value:@user.secondName%>
     </div>
     <div>
         <%= f.label :Apellidos ,id: 'id_lastName' %>
-        <%= f.text_field :lastName ,required: true, maxlength: 60%>
+        <%= f.text_field :lastName ,required: true, maxlength: 60%,value: @user.lastName%>
     </div>
     <div>
         <%= f.label :Género,id: 'id_gender' %>
-        <%= f.select :gender, User.genders.keys.map{ |key| [key.humanize, key] } ,required: true%>
+        <%= f.select :gender, User.genders.keys.map{ |key| [key.humanize, key] } ,required: true, value:@user.gender%>
     </div>
     <div>
         <%= f.label :'Fecha de Nacimiento ' ,id: 'dateBirth'%>
-        <%= f.date_field :dateBirth, id: 'datepicker' ,required: true%>
+        <%= f.date_field :dateBirth, id: 'datepicker' ,required: true,value: @user.dateBirth%>
     </div>
     <div>
         <%= f.label :email ,id: 'id_email'%>
-        <%= f.email_field :email, class: 'form-control' ,required: true%>
+        <%= f.email_field :email, class: 'form-control' ,required: true,value: @user.email%>
     </div>
     <div>
         <%= f.label :Número ,id: 'id_phoneNumber' %>
-        <%= f.number_field :phoneNumber ,required: true, max:9999999999%>
+        <%= f.number_field :phoneNumber ,required: true, max:9999999999,value: @user.phoneNumber%>
     </div>
     <div>
-        <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+        <%= f.submit 'Modificar', class: 'btn btn-primary' %>
     </div>
 <% end %>
 
+<%= link_to "Volver", users_path, class: "btn btn-primary" %>
+
+<%= button_to "Eliminar", user_path(@user), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger" %>

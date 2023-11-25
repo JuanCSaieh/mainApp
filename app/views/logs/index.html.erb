@@ -1,0 +1,145 @@
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 20px;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    select,
+    input,
+    date_field {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    th {
+        background-color: #3498db;
+        color: #ffffff;
+    }
+
+    tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+<div>
+    <div>
+        <h1>Listado de logueos</h1>
+    </div>
+    <div>     
+        <form action = "/u/foo" >           
+        <br>
+        <label for="date">Numero de Documento</label>
+        <br>
+        <%= date_field :date, id: 'datepicker' ,required: true%>
+        <br>
+        <br>
+        <input type="submit"/>
+        </form>
+    </div>
+    <div>     
+        <form action = "/u/foo" >           
+        <br>
+        <label for="docType">Tipo de Documento</label>
+        <br>
+        <select id="docType" name="docType", required>
+        <option value=0>Cedula</option>
+        <option value=1>Tarjeta Identidad</option>
+        </select>
+        <br>
+        <br>
+        <label for="docNum">Número de Documento</label>
+        <br>
+        <input type="number" name="docNum" required max=9999999999>
+        <br>
+        <br>
+        <input type="submit"/>
+        </form>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tipo de Documento</th>
+            <th>N. Documento</th>
+            <th>Fecha </th>
+            <th>Proceso</th>
+
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @logs.each do |log| %>
+            <tr>
+                <td></td>
+                <td><%= log.docType %></td>
+                <td><%= log.docNum %></td>
+                <td><%= log.date %></td>
+                <td><%= log.opType %></td>
+
+            </tr>
+        <% end %>
+    </tbody>
+</table>
