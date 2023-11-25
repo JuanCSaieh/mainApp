@@ -2,7 +2,8 @@ class User < ApplicationRecord
 	validates :docType, :docNum, :firstName, :secondName,
 			:lastName, :dateBirth, :gender, :email,
 			:phoneNumber, presence: true
-	validates :docNum, :email, uniqueness: true
+  	validates :docType, uniqueness: { scope: :docNum }
+	validates :email, uniqueness: true
 	validates :docNum, :phoneNumber, length: { maximum: 10 }
 	validates :docNum, :phoneNumber, numericality: true
 	validates :firstName, :secondName, length: { maximum: 30}
