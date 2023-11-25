@@ -2,9 +2,9 @@
     <div>
         <h1>Listado de usuarios</h1>
     </div>
-         <%= button_to "Nuevo", "/users/new",method: :get,class: "btn btn-info" %>
-         <%= button_to "Log", "/users/log",method: :get,class: "btn btn-info" %>
-        <%= button_to "Consultar", "/users/consultar",method: :get,class: "btn btn-info" %>
+        <%= button_to "Nuevo", "/users/new",method: :get,class: "btn btn-info" %>
+        <%= button_to "Log", "/users/log",method: :get,class: "btn btn-info" %>
+        <%= button_to "Consultar", "/users/consult", method: :get ,class: "btn btn-info" %>
     <div>
     </div>
 </div>
@@ -24,6 +24,7 @@
             <th>Celular</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,11 +40,10 @@
                 <td><%= user.gender %></td>
                 <td><%= user.email %></td>
                 <td><%= user.phoneNumber %></td>
-                <td><%= link_to "Ver mas",
-                            show_path(user.docType, user.docNum),
-                            class: "btn btn-danger btn-lg"  %></td>
                 <td><%= link_to "Modificar",
                             edit_user_path(user),
+                            class: "btn btn-danger btn-lg"  %></td>
+                <td><%= button_to "delete", user_path(user), method: :delete,
                             class: "btn btn-danger btn-lg"  %></td>
             </tr>
         <% end %>

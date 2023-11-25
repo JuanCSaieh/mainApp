@@ -1,0 +1,44 @@
+<div>
+    
+</div>
+<div>
+    <h3>Tipo de documento</h3>
+    <%= @user.docType %>
+</div>
+<div>
+    <h3>Número de Documento</h3>
+    <%= @user.docNum %>
+</div>
+<div>
+    <h3>Primer Nombre</h3>
+    <%= @user.firstName %>
+</div>
+<div>
+    <h3>Segundo Nombre</h3>
+    <%= @user.secondName %>
+</div>
+<div>
+    </h3>Apellidos</h3>
+    <%= @user.lastName %>
+</div>
+<div>
+    <h3>Gender</h3>
+    <%= @user.gender%>
+</div>
+<div>
+    <h3>Fecha de Nacimiento</h3>
+    <%= @user.dateBirth %>
+</div>
+<div>
+    <h3>email</h3>
+    <%= @user.email%>
+</div>
+<div>
+    <h3>Numero de Celular</h3>
+    <%= @user.phoneNumber%>
+</div>
+
+<%= link_to "Volver", users_path, class: "btn btn-primary" %>
+
+<%= button_to "delete", user_path(@user), method: :delete,
+                            class: "btn btn-danger btn-lg"  %>

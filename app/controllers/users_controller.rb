@@ -3,6 +3,9 @@ class UsersController < ApplicationController
 		@users = User.all
 	end
 
+	def consult
+	end
+
 	def new
 		@user = User.new
 	end
@@ -19,49 +22,55 @@ class UsersController < ApplicationController
 		if response.status == 200
 			@user = User.find(JSON.parse(response.body)["id"])
 
-			render json: @user
+			redirect_to controller: :users, action: :show, id:@user.id
 
 		else
 			render "new"
 		end
 	end
 
-	def show
+	def foo
 		response = Faraday.get('http://192.168.0.101:3001/users/'.concat(
 								params[:docType].to_s,"/", params[:docNum].to_s))
 		if response.status == 200
-			@user = User.find(JSON.parse(response.body)["id"])
-			render json: @user
+			@user = User.find(response.body.to_i)
+			redirect_to controller: :users, action: :show, id:@user.id
 		else
-			render status: :not_found
+			redirect_to controller: :users, action: :consult
 		end
 	end
 
+	def show
+		set_user
+	end
+
 	def edit
-		set_user	
+		set_user
 	end
 
 	def update
 		conn = Faraday.new(url: 'http://192.168.0.101:3001')
 		response = conn.patch('users/'.concat(params[:id].to_s)) do |req|
 		  	req.headers['Content-Type'] = 'application/json'
-		  	req.body = JSON.generate(user_params)
+		  	req.body = user_params.to_json
 		end
+
 		if response.status == 200
 			@user = User.find(params[:id])
-			# redirect to show
+			redirect_to controller: :users, action: :show, id:@user.id
 		else
 			render status: 422
 		end
 	end
 
 	def destroy
+		@users = User.all
 		conn = Faraday.new(url: 'http://192.168.0.101:3001')
 		response = conn.delete('/users/'.concat(params[:id].to_s))
 		if response.status == 200
-			# redirect to index or consult view
+			redirect_to controller: :users, action: :index
 		else
-			render status: :not_found
+			redirect_to controller: :users, action: :index
 		end
 	end
 
