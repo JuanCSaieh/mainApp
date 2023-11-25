@@ -2,7 +2,7 @@ Rails.application.routes.draw do
  get'/users', to: 'users#index'
  get'/users/new', to: 'users#new'
  get'/logs/index', to: 'logs#index'
- get'/users/consultar', to: 'users#consultar'
+ get'/users/consult', to: 'users#consult'
  get'/users/edit', to: 'users#edit'
  get'/logs/consultar', to: 'logs#consultar'
  get'users/show', to: 'users#show'
@@ -19,5 +19,6 @@ get'/logs', to: 'logs#index'
   get "users/consult", to: "users#consult", as: :get
   resources :users, except: :foo
   get "u/foo", to: "users#foo"
+  get "users/:docType/:docNum", to: "users#show", as: :show
   resources :logs, only: :create
 end
