@@ -1,6 +1,47 @@
-<div>
-    
-</div>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    div {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #3498db;
+    }
+
+    .btn {
+        background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .btn:hover {
+        background-color: #2980b9;
+    }
+</style>
+
+
 <div>
     <h3>Tipo de documento</h3>
     <%= @user.docType %>
@@ -40,5 +81,4 @@
 
 <%= link_to "Volver", users_path, class: "btn btn-primary" %>
 
-<%= button_to "delete", user_path(@user), method: :delete,
-                            class: "btn btn-danger btn-lg"  %>
+<%= button_to "Eliminar", user_path(@user), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger" %>

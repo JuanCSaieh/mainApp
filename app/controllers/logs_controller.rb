@@ -1,4 +1,7 @@
 class LogsController < ApplicationController
+	def index
+		@logs = Log.all
+	end	
 	def create
 		conn = Faraday.new(url: 'http://192.168.0.101:3001')
 		response = conn.post('/logs') do |req|
@@ -13,6 +16,7 @@ class LogsController < ApplicationController
 			@logs = Log.where(id: log_ids)
 			render json: @logs
 			# TODO redirect to show view
+		end
 	end
 
 	protected
@@ -21,4 +25,5 @@ class LogsController < ApplicationController
 		params.require(:log).permit(:docType, :docNum,
 									:created_at)
 	end
+
 end
