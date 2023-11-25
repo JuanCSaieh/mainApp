@@ -16,7 +16,8 @@ get'/logs', to: 'logs#index'
 
   # Defines the root path route ("/")
   root "users#index"
-  resources :users, except: :show
-  get "users/:docType/:docNum", to: "users#show", as: :show
+  get "users/consult", to: "users#consult", as: :get
+  resources :users, except: :foo
+  get "u/foo", to: "users#foo"
   resources :logs, only: :create
 end

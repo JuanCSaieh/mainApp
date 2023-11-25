@@ -64,18 +64,19 @@
         background-color: #2980b9;
     }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 <div class="container">
     <div>
         <h1>Listado de usuarios</h1>
     </div>
     <div class="buttons-container">
-        <%= button_to "Nuevo", new_user_path, method: :get, class: "btn btn-info" %>
+        <%= button_to "Nuevo", users_new_path, method: :get, class: "btn btn-info" %>
         <%= button_to "Log", logs_index_path, method: :get, class: "btn btn-info" %>
-        <%= button_to "Consultar", users_consultar_path, method: :get, class: "btn btn-info" %>
+        <%= button_to "Consultar", users_consult_path, method: :get, class: "btn btn-info" %>
     </div>
 </div>
-
 
 <table>
     <thead>
@@ -90,6 +91,7 @@
             <th>Género</th>
             <th>Correo Electrónico</th>
             <th>Celular</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -107,13 +109,15 @@
                 <td><%= user.gender %></td>
                 <td><%= user.email %></td>
                 <td><%= user.phoneNumber %></td>
-                <td><%= link_to "+",
-                            show_path(user.docType, user.docNum),
-                            class: "btn btn-danger btn-lg"  %></td>
                 <td><%= link_to "Modificar",
                             edit_user_path(user),
                             class: "btn btn-danger btn-lg"  %></td>
+                <td><%= button_to user_path(user), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: 'Are you sure?' } do %>
+                    <i class="fas fa-trash-alt"></i>
+                <% end %></td>
             </tr>
         <% end %>
     </tbody>
 </table>
+
+

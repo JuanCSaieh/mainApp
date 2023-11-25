@@ -1,134 +1,83 @@
-
 <style>
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
- 
+        display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
     }
-    .buttons-container {
-        display: flex;
-        gap: 10px;
+
+    div {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #3498db;
     }
 
     .btn {
-        flex: 1;
-        padding: 15px;
-        font-size: 16px;
-        text-align: center;
-        text-decoration: none;
         background-color: #3498db;
         color: #ffffff;
+        padding: 10px 15px;
+        font-size: 16px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        text-decoration: none;
+        margin-top: 10px;
+        display: inline-block;
     }
 
     .btn:hover {
         background-color: #2980b9;
     }
-
-    form {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        width: 400px;
-        margin: auto;
-    }
-
-    div {
-        margin-bottom: 5px;
-    }
-
-    label {
-        display: block;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-
-    select,
-    input,
-    textarea {
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    select {
-        height: 35px; /* Ajusta la altura según tus preferencias */
-    }
-
-    /* Personaliza el estilo del botón según tus preferencias */
-    input[type="submit"] {
-        background-color: #3498db;
-        color: #ffffff;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #2980b9;
-    }
 </style>
-<%= form_for @user, html: { multipart: true } do |f| %>
-    <div>
-        <%= f.label :Foto, id: 'id_photo' %>
-        <%= f.file_field :photo_url, id: 'photo_upload',required: true,  accept: 'image/*',value: @user.photo   %>
-    </div>
-    <div>
-        <%= f.label :'Tipo de documento',id: 'id_docType' %>
-        <%= f.select :docType, User.docTypes.keys.map{ |key| [key.humanize, key] },value: @user.docType %>
-    </div>
-    <div>
-        <%= f.label :'Número de Documento',id: 'id_docNum' %>
-        <%= f.number_field :docNum, max: 9999999999,required: true,value: @user.docNum%>
-    </div>
-    <div>
-        <%= f.label :Nombre ,id: 'id_firstName' %>
-        <%= f.text_field :firstName ,required: true,maxlength: 30%,value: @user.firstName%>
-    </div>
-    <div>
-        <%= f.label :'Segundo nombre',id: 'id_secondName' %>
-        <%= f.text_field :secondName, maxlength: 30%, value:@user.secondName%>
-    </div>
-    <div>
-        <%= f.label :Apellidos ,id: 'id_lastName' %>
-        <%= f.text_field :lastName ,required: true, maxlength: 60%,value: @user.lastName%>
-    </div>
-    <div>
-        <%= f.label :Género,id: 'id_gender' %>
-        <%= f.select :gender, User.genders.keys.map{ |key| [key.humanize, key] } ,required: true, value:@user.gender%>
-    </div>
-    <div>
-        <%= f.label :'Fecha de Nacimiento ' ,id: 'dateBirth'%>
-        <%= f.date_field :dateBirth, id: 'datepicker' ,required: true,value: @user.dateBirth%>
-    </div>
-    <div>
-        <%= f.label :email ,id: 'id_email'%>
-        <%= f.email_field :email, class: 'form-control' ,required: true,value: @user.email%>
-    </div>
-    <div>
-        <%= f.label :Número ,id: 'id_phoneNumber' %>
-        <%= f.number_field :phoneNumber ,required: true, max:9999999999,value: @user.phoneNumber%>
-    </div>
-    <div>
-        <%= f.submit 'Modificar', class: 'btn btn-primary' %>
-    </div>
-<% end %>
+
+
+<div>
+    <h3>Tipo de documento</h3>
+    <%= @user.docType %>
+</div>
+<div>
+    <h3>Número de Documento</h3>
+    <%= @user.docNum %>
+</div>
+<div>
+    <h3>Primer Nombre</h3>
+    <%= @user.firstName %>
+</div>
+<div>
+    <h3>Segundo Nombre</h3>
+    <%= @user.secondName %>
+</div>
+<div>
+    </h3>Apellidos</h3>
+    <%= @user.lastName %>
+</div>
+<div>
+    <h3>Gender</h3>
+    <%= @user.gender%>
+</div>
+<div>
+    <h3>Fecha de Nacimiento</h3>
+    <%= @user.dateBirth %>
+</div>
+<div>
+    <h3>email</h3>
+    <%= @user.email%>
+</div>
+<div>
+    <h3>Numero de Celular</h3>
+    <%= @user.phoneNumber%>
+</div>
 
 <%= link_to "Volver", users_path, class: "btn btn-primary" %>
 
