@@ -1,25 +1,46 @@
-<%= form_for @user do |f| %>
+<%= form_for @user, html: { multipart: true } do |f| %>
     <div>
-        <%= f.label :Nombre %>
-        <%= f.text_field :firstName %>
+        <%= f.label :Foto, id: 'id_photo' %>
+        <%= f.file_field :photo_url, id: 'photo_upload',required: true,  accept: 'image/*'   %>
     </div>
     <div>
-        <%= f.label :'Segundo nombre' %>
-        <%= f.text_field :secondName %>
+        <%= f.label :'Tipo de documento',id: 'id_docType' %>
+        <%= f.select :docType, options_for_select(['CC', 'TI']), {}, class: 'form-control' %>
     </div>
     <div>
-        <%= f.label :Apellidos %>
-        <%= f.text_field :lastName %>
+        <%= f.label :'Número de Documento',id: 'id_docNum' %>
+        <%= f.number_field :docNum, max: 9999999999,required: true%>
     </div>
     <div>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.label :Nombre ,id: 'id_firstName' %>
+        <%= f.text_field :firstName ,required: true,maxlength: 30%>
     </div>
     <div>
-        <%= f.label :Número %>
-        <%= f.text_field :phoneNumber %>
+        <%= f.label :'Segundo nombre',id: 'id_secondName' %>
+        <%= f.text_field :secondName, maxlength: 30%>
     </div>
     <div>
-        <%= f.submit %>
+        <%= f.label :Apellidos ,id: 'id_lastName' %>
+        <%= f.text_field :lastName ,required: true, maxlength: 60%>
+    </div>
+    <div>
+        <%= f.label :Género,id: 'id_gender' %>
+        <%= f.select :gender, options_for_select(['Masculino', 'Femenino', 'No binario', 'Prefiero no decir']), {}, class: 'form-control' ,required: true%>
+    </div>
+    <div>
+        <%= f.label :'Fecha de Nacimiento ' ,id: 'dateBirth'%>
+        <%= f.date_field :dateBirth, id: 'datepicker' ,required: true%>
+    </div>
+    <div>
+        <%= f.label :email ,id: 'id_email'%>
+        <%= f.email_field :email, class: 'form-control' ,required: true%>
+    </div>
+    <div>
+        <%= f.label :Número ,id: 'id_phoneNumber' %>
+        <%= f.number_field :phoneNumber ,required: true, max:9999999999%>
+    </div>
+    <div>
+        <%= f.submit 'Guardar', class: 'btn btn-primary' %>
     </div>
 <% end %>
+
