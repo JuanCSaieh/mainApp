@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get "users/consult", to: "users#consult", as: :get
   resources :users, except: :foo
   get "u/foo", to: "users#foo"
-  resources :logs, only: :create
+  resources :logs, only: [:index, :create]
+  get "logs/query", to: "logs#query"
 end

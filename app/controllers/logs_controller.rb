@@ -1,24 +1,38 @@
 class LogsController < ApplicationController
-	def create
-		conn = Faraday.new(url: 'http://192.168.0.101:3001')
+
+	def index
+		whichLogs = params[:g]
+		if whichLogs
+			@logs = Log.where(id: whichLogs.pluck(:id))
+		else
+			@logs = Log.all
+		end
+	end
+
+	def query
+		conn = Faraday.new(url: 'http://192.168.0.101:3002')
 		response = conn.post('/logs') do |req|
 		  req.headers['Content-Type'] = 'application/json'
-		  req.body = JSON.generate(log_params)
+		  req.body = log_params
 		end
 		if response.status == 200
-			log_ids = []
+			@logs = []
 			JSON.parse(response.body).each do |log|
-				log_ids << log["id"]
+				@logs.append(log)
 			end
-			@logs = Log.where(id: log_ids)
-			render json: @logs
-			# TODO redirect to show view
+			redirect_to controller: :logs, action: :index, g: @logs
+		end
 	end
 
 	protected
 
 	def log_params
-		params.require(:log).permit(:docType, :docNum,
-									:created_at)
+		params.permit(:docType, :docNum, :created_at).to_json
 	end
+
+	def set_logs
+		#@logs = Log.where(id: @logs.)
+	end
+
+
 end
