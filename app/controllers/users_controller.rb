@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 	def create
 		req_params = {}
 		9.times { |i| req_params[user_params.keys[i]] = user_params.values[i] }
-		conn = Faraday.new(url: 'http://192.168.0.101:3001')
+		conn = Faraday.new(url: ':3001')
 		
 		response = conn.post('/users') do |req|
   			req.headers['Content-Type'] = 'application/json'
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 	end
 
 	def foo
-		response = Faraday.get('http://192.168.0.101:3001/users/'.concat(
+		response = Faraday.get(':3001/users/'.concat(
 								params[:docType].to_s,"/", params[:docNum].to_s))
 		if response.status == 200
 			@user = User.find(response.body.to_i)
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		conn = Faraday.new(url: 'http://192.168.0.101:3001')
+		conn = Faraday.new(url: ':3001')
 		response = conn.patch('users/'.concat(params[:id].to_s)) do |req|
 		  	req.headers['Content-Type'] = 'application/json'
 		  	req.body = user_params.to_json
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
 	def destroy
 		@users = User.all
-		conn = Faraday.new(url: 'http://192.168.0.101:3001')
+		conn = Faraday.new(url: ':3001')
 		response = conn.delete('/users/'.concat(params[:id].to_s))
 		if response.status == 200
 			redirect_to controller: :users, action: :index

@@ -10,7 +10,7 @@ class LogsController < ApplicationController
 	end
 
 	def query
-		conn = Faraday.new(url: 'http://192.168.0.101:3002')
+		conn = Faraday.new(url: ':3002')
 		response = conn.post('/logs') do |req|
 		  req.headers['Content-Type'] = 'application/json'
 		  req.body = log_params
